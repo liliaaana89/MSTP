@@ -1,4 +1,3 @@
-
 package com.example;
 
 import java.io.*;
@@ -42,13 +41,17 @@ public class ServerArchivio {
 
             // CREAZIONE DEGLI STREAM
             BufferedReader in = new BufferedReader(
-                new InputStreamReader(client.getInputStream(),
-                StandardCharsets.UTF_8)
+                new InputStreamReader(
+                    client.getInputStream(),
+                    StandardCharsets.UTF_8
+                )
             );
 
             PrintWriter out = new PrintWriter(
-                new OutputStreamWriter(client.getOutputStream(),
-                StandardCharsets.UTF_8), true
+                new OutputStreamWriter(
+                    client.getOutputStream(),
+                    StandardCharsets.UTF_8
+                ), true
             );
 
             // RICEZIONE DELLA RICHIESTA
@@ -94,7 +97,11 @@ public class ServerArchivio {
             }
 
             // RICERCA DEL FILE CON LE ESTENSIONI AMMESSE
-            File cartella = new File("documenti");
+            File cartella = new File("demo/documenti");
+
+            System.out.println("Cartella di lavoro: " + System.getProperty("user.dir"));
+            System.out.println("Percorso documenti: " + cartella.getAbsolutePath());
+
 
             File file = null;
             String tipo = "";
@@ -122,8 +129,11 @@ public class ServerArchivio {
             boolean statoInviato = false;
 
             try (BufferedReader lettoreFile = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file),
-                StandardCharsets.UTF_8))) {
+                new InputStreamReader(
+                    new FileInputStream(file),
+                    StandardCharsets.UTF_8
+                )
+            )) {
 
                 // INVIO DELLO STATO E DELL'INTESTAZIONE
                 out.println("OK FILE");
