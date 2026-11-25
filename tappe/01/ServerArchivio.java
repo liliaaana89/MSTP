@@ -94,7 +94,7 @@ public class ServerArchivio {
             }
 
             // RICERCA DEL FILE
-            File cartella = new File("documenti");
+            File cartella = new File("demo/documenti");
             File file = new File(cartella, nomeFile);
 
             if (!file.isFile()) {

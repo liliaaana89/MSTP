@@ -95,7 +95,7 @@ public class ServerArchivio {
             }
 
             // RICERCA DEL FILE CON LE ESTENSIONI AMMESSE
-            File cartella = new File("documenti");
+            File cartella = new File("demo/documenti");
 
             File file = null;
             String tipo = "";

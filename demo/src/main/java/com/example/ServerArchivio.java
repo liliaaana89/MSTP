@@ -6,8 +6,12 @@ import java.nio.charset.StandardCharsets;
 
 public class ServerArchivio {
 
-    // ESTENSIONI AMMESSE
-    private static final String[] ESTENSIONI = {"txt", "md", "csv"};
+    // ESTENSIONI E TIPI MIME
+    private static final String[][] TIPI = {
+        {"txt", "text/plain; charset=utf-8"},
+        {"md", "text/markdown; charset=utf-8"},
+        {"csv", "text/csv; charset=utf-8"}
+    };
 
     public static void main(String[] args) {
 
@@ -96,25 +100,25 @@ public class ServerArchivio {
                 return;
             }
 
-            // RICERCA DEL FILE CON LE ESTENSIONI AMMESSE
+            // RICERCA DEL FILE E DEL TIPO MIME
             File cartella = new File("demo/documenti");
-
-            System.out.println("Cartella di lavoro: " + System.getProperty("user.dir"));
-            System.out.println("Percorso documenti: " + cartella.getAbsolutePath());
-
 
             File file = null;
             String tipo = "";
 
-            for (String estensione : ESTENSIONI) {
+            for (String[] elemento : TIPI) {
+
+                String estensione = elemento[0];
+                String tipoMime = elemento[1];
 
                 File trovato = new File(
                     cartella, nomeFile + "." + estensione
                 );
 
                 if (trovato.isFile()) {
+
                     file = trovato;
-                    tipo = estensione;
+                    tipo = tipoMime;
                     break;
                 }
             }
@@ -137,7 +141,7 @@ public class ServerArchivio {
 
                 // INVIO DELLO STATO E DELL'INTESTAZIONE
                 out.println("OK FILE");
-                out.println("TYPE " + tipo);
+                out.println("Content-Type: " + tipo);
                 out.println();
 
                 statoInviato = true;
